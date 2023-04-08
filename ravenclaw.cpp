@@ -1,6 +1,7 @@
 //A program to convert any integer number from decimal to binary, octal and hexadecimal and vise-versa.
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
 
 using namespace std;
 
@@ -53,15 +54,11 @@ cin>>type;
  
  case 1:
  {
-      
-       int sizeO; // the size of the array we will use for number of max octal digits.
-       int sizeH; // the size of the array we will use for number max hexa-decimal digits.
-
-
+       
 //this block is for decimal to binary conversion.
 {
 
-       int rem; // 'rem' for remainder.
+     
        int sizeB; // the size of the array we will use for number of max binary digits or bits.
 
 
@@ -82,8 +79,8 @@ cin>>type;
                  }
              }
 
-      /*operation of conversion using a nested for loop inside a while loop to recursively devide by 2 
-      and store the remainder in an aray.*/
+       /*operation of conversion using a nested for loop to recursively devide by 2 
+        and store the remainder in an aray.*/
             
             
             int binary [sizeB]; // aray to hold the resultant binary.
@@ -126,10 +123,10 @@ cin>>type;
 
 
             int binary [sizeB]; // aray to hold the resultant binary.
-            int Tnumber = number; // temporary variable so that we dont alter the original input. 
+            int Tnumber = abs(number); // temporary variable so that we dont alter the original input. abs() is absolute value. 
             int j; 
 
-                    for (j = 0; Tnumber<0; ++j)  
+                    for (j = 0; Tnumber>0; ++j)  
                     {
                          binary[j] = Tnumber%2;
                          Tnumber /=2;
@@ -150,11 +147,99 @@ cin>>type;
       }
      
 }    
+  
+    //this block is for decimal to octal.
+ {
+    int sizeO; // the size of the array we will use for number of max octal digits.
+
+
+     //for positive numbers.   
+     if (number >= 0) 
+
+      {
+        //specifyiing how many bits we will need.
+        if (number <= 511 ) 
+             {
+                 sizeO=3;
+             }
+         else 
+             {
+                 for (int i; pow(8,i) <= number; ++i)
+                 {
+                    sizeO=i;
+                 }
+             }
+
+       /*operation of conversion using a nested for loop to recursively devide by 8
+        and store the remainder in an aray.*/
+            
+            
+            int octal [sizeO]; // aray to hold the resultant binary.
+            int Tnumber = number; // temporary variable so that we dont alter the original input. 
+            int j; 
+
+                    for (j = 0; Tnumber>0; ++j)  
+                    {
+                        octal[j] = Tnumber%8;
+                         Tnumber /=8;
+                    }
+
+                    //assignning the result reversed.
+                   
+                    cout<<"\nthe octal equivalent of the number you entered is:  ";
+                   
+                    for ( j= j-1 ; j>=0 ; --j)
+                    {
+                        cout<<octal[j];
+                    }
+
+     }
     
 
+     //for  negative numbers.
+     else 
+      {
+        //specifyiing how many bits we will need for negative nember.   
+             if (number >= -511 ) 
+             {
+                sizeO=3;
+             }
+              else 
+             {
+                for (int i; pow(8,i) >= number; ++i)
+                  {
+                  sizeO=i;
+                  }
+             }
+
+
+            int octal [sizeO]; // aray to hold the resultant binary.
+            int Tnumber = abs(number); // temporary variable so that we dont alter the original input. abs() is absolute value.
+            int j; 
+
+                    for (j = 0; Tnumber>0; ++j)  
+                    {
+                         octal[j] = Tnumber%8;
+                         Tnumber /=8;
+                    }
+
+                    //assignning the result reversed.
+                   
+                    cout<<"\nthe octal equivalent of the number you entered is:  -";
+                   
+                    for ( j= j-1 ; j>=0 ; --j)
+                    {
+                        cout<<octal[j];
+                    }
+            
+
+ }
+ 
+ 
+ 
  }
 
-
+ }
 
 
 
