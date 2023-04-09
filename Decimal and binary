@@ -249,6 +249,7 @@ cin>>type;
  }
 
  case 2:
+ //binary to decimal octal and hexadecimal
     {
             int num;
 num=number;
