@@ -285,6 +285,9 @@ char hexadecimalNumber[100];
     }
 break;
  }
+    
+    
+    //This case is if the user choose binary input.
 case 2:
 {
 
@@ -328,6 +331,7 @@ e:
                     {
 
                     case 1:
+                    //binary to decimal.
                     {
                         bool tester=dec<0;// to deal with negative numbers
                         if(dec==0)
@@ -362,6 +366,7 @@ e:
 
                     break;
                     case 2:
+                    //binary to octal.
                     {
                         bool tester=dec<0;
                         if(dec==0)
@@ -394,6 +399,7 @@ e:
                     }
 
                     break;
+                    //binary to hexa
                     case 3:
                     {
                         bool tester=dec<0;
@@ -458,6 +464,7 @@ e:
             }
 
         }
+  //if the user had entered a number containing other than 0 and 1.
         else{
                 //improper input
             cout<<"invalid input"<<endl;
