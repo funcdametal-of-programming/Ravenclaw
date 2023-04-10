@@ -1,13 +1,13 @@
 #include<iostream>
 #include<cmath>
-#include<cstring>
+
 using namespace std;
 int main()
 {
-int option,decimal,num,i=0,base,remainder,digit,converted[100],j;
-long octal [100];
-char hexadecimalNumber[100];
-bool isBinary=true,isOctal=true,isDecimal=true,isHex=true;
+int option,decimal,num,i=0,base,remainder,converted[100],j;
+
+char hexadecimalNumber[100];//array to hold the hexadecimal resultant
+
 
 cout <<"\t\t\t\t_____welcome_____\n";
 cout <<"select an option \n";
@@ -17,7 +17,7 @@ cout << "Enter your choice: ";
 cin  >> option;
 
 switch(option){
-
+//to convert decimal to any base
 case 1:
   cout <<"enter number: ";
   cin >>num;
@@ -26,8 +26,10 @@ case 1:
     cin >>base;
     int i = 0,j;
    if(base==16){
+     //repeatedly divide the number by 16 and store the remainder in hexadecimalNumber. 
             while(num>0){
              int remainder = num % 16;
+               // number converted to its ASCII equivalent
         if (remainder < 10)
             hexadecimalNumber[i] = remainder + 48;
         else
@@ -35,6 +37,7 @@ case 1:
         num = num/ 16;
         i++;
             }
+            // prints the hexadecimal equivalent of the input number by iterating through the hexadecimalNumber array in reverse order and printing each element.
         for (int j = i - 1; j >= 0; j--)
     cout<<hexadecimalNumber[j];
     }
@@ -52,6 +55,7 @@ case 1:
 }
    break;
 
+//to convert binary to decimal
 case 2:
   cout <<"enter number: ";
   cin >>num;
