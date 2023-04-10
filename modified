@@ -1,0 +1,597 @@
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include<cstring>
+#include<algorithm>
+
+using namespace std;
+
+int main()
+{
+  int short unsigned type;
+  int number;
+
+
+a:
+cout <<"\t\t\t\t_____welcome_____\n";
+cout<<"This is a program that converts decimal to binary,octal and hexadecimal and vice-versa."<<endl;
+b:
+cout<<"\n\nWhich type of number are you planning to convert."<<endl;
+cout << "1.Convert decimal to binary,octal or hexa-decimal.\n";
+cout << "2.Convert binary to decimal,octal or hexa-decimal.\n";
+cout << "3.Convert octal to decimal,binary or hexa-decimal.\n";
+cout << "4.Convert hexa-decimal to decimal,octal or binary.\n";
+cout << "\n\nEnter your choice: ";
+cin>>type;
+
+ //contigency for an unwanted input in the type specification.
+     if(type < 0 || type > 4)
+        {
+            char cont;
+            cout<<"You can only enter numbers from 1 - 4 to choose."<<endl;
+        c:  cout<<"Press Y to choose base again or\nN to restart the whole program."<<endl;
+             cin>>cont;
+                if (cont == 'y' || cont == 'Y')
+                {
+                    goto b;
+                }
+                else if (cont == 'n' || cont == 'N')
+                {
+                     goto a;
+                }
+                else
+                {
+                    cout<<"You have entered the wrong character!!"<<endl;
+                    goto c;
+                }
+
+        }
+
+ //the user choose correctly.
+switch(type){
+// to Convert decimal to binary,octal or hexa-decimal
+case 1:
+    {
+int num;
+    cout<<"Enter number: ";
+    cin>>num;
+    int dec = 0, i = 0, rem,Num=num;
+    bool test=true;// to check the input is valid
+
+    while(Num)
+        // process to check the input is appropriate for base 10
+        {
+            int y;
+            y=Num%10;
+            if(y<10)
+                {
+                    test&=true;
+                }
+            else
+                {
+                    test&=false;
+                }
+            Num/=10;
+        }
+    if(test)//process continue if valid base
+        {
+            dec=num;
+            {
+                int base2;
+                string converted,z;
+d:
+                cout<<"to which do you want to change "<<endl;
+                cout<<"1) octal\n2) binary\n3)hexa decimal\n";
+                cin>>base2;
+                switch(base2)
+                    {
+//to convert decimal to octal
+                    case 1:
+                    {
+                        bool tester=dec<0;// to deal with negative numbers
+                        if(dec==0)
+                            {
+                                cout<<"decimal representation is "<<dec;
+                            }
+                        else 
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%8;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=8;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"octal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            //print all elements of string
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    //to convert decimal to binary
+                    case 2:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"binary representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%2;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=2;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"octal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    //to convert decimal to hexadecimal
+                    case 3:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"hexadecimal representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%16;
+                                        switch(y)
+                                            {
+                                            case 10:
+                                                converted.append("A");
+                                                break;
+                                            case 11:
+                                                converted.append("B");
+                                                break;
+                                            case 12:
+                                                converted.append("C");
+                                                break;
+                                            case 13:
+                                                converted.append("D");
+                                                break;
+                                            case 14:
+                                                converted.append("E");
+                                                break;
+                                            case 15:
+                                                converted.append("F");
+                                                break;
+                                            default:
+                                                z=to_string(y);
+                                                converted.append(z);
+                                                break;
+                                            }
+                                        dec/=16;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"hexadecimal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+                    break;
+                    default://give chance to choose appropriate base
+                        cout<<"invalid input"<<endl;
+                        goto d;
+                    }
+
+
+            }
+
+        }
+        else{
+                //improper input
+            cout<<"invalid input"<<endl;
+        }
+    }
+break;
+//Convert binary to decimal,octal or hexa-decimal
+case 2:
+    {
+    int num;
+    cout<<"number ";
+    cin>>num;
+    int dec = 0, i = 0, rem,Num=num;
+    bool test=true;// to check the input is valid
+
+    while(Num)
+        // process to check the input is appropriate for base 2
+        {
+            int y;
+            y=Num%10;
+            if(y<2)
+                {
+                    test&=true;
+                }
+            else
+                {
+                    test&=false;
+                }
+            Num/=10;
+        }
+    if(test)//process continue if valid base
+        {
+            while (num!=0)
+            //convert to base 10
+                {
+                    rem = num % 10;
+                    num/= 10;
+                    dec += rem * pow(2, i);
+                    ++i;
+                }
+            {
+                int base2;
+                string converted,z;
+f:
+                cout<<"to which do you want to change "<<endl;
+                cout<<"1) decimal\n2) octal\n3)hexa decimal\n";
+                cin>>base2;
+                switch(base2)
+                    {
+// to convert binary to decimal
+                    case 1:
+                    {
+                        bool tester=dec<0;// to deal with negative numbers
+                        if(dec==0)
+                            {
+                                cout<<"decimal representation is "<<dec;
+                            }
+                        else //
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%10;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=10;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"decimal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            //print all elements of string
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    // to convert binary to octal
+                    case 2:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"Octal representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%8;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=8;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"octal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    //to convert binary to hexadeciaml
+                    case 3:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"hexadecimal representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%16;
+                                        switch(y)
+                                            {
+                                            case 10:
+                                                converted.append("A");
+                                                break;
+                                            case 11:
+                                                converted.append("B");
+                                                break;
+                                            case 12:
+                                                converted.append("C");
+                                                break;
+                                            case 13:
+                                                converted.append("D");
+                                                break;
+                                            case 14:
+                                                converted.append("E");
+                                                break;
+                                            case 15:
+                                                converted.append("F");
+                                                break;
+                                            default:
+                                                z=to_string(y);
+                                                converted.append(z);
+                                                break;
+                                            }
+                                        dec/=16;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"hexadecimal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+                    break;
+                    default://give chance to choose appropriate base
+                        cout<<"invalid input"<<endl;
+                        goto f;
+                    }
+
+
+            }
+
+        }
+        else{
+                //improper input
+            cout<<"invalid input"<<endl;
+        }
+}
+break;
+//Convert octal to decimal,binary or hexa-decimal
+case 3:
+ {
+    int num;
+    cout<<"number ";
+    cin>>num;
+    int dec = 0, i = 0, rem,Num=num;
+    bool test=true;// to check the input is valid
+
+    while(Num)
+        // process to check the input is appropriate for base 2
+        {
+            int y;
+            y=Num%10;
+            if(y<8)
+                {
+                    test&=true;
+                }
+            else
+                {
+                    test&=false;
+                }
+            Num/=10;
+        }
+    if(test)//process continue if valid base
+        {
+            while (num!=0)
+            //convert to base 10
+                {
+                    rem = num % 10;
+                    num/= 10;
+                    dec += rem * pow(8, i);
+                    ++i;
+                }
+            {
+                int base2;
+                string converted,z;
+g:
+                cout<<"to which do you want to change "<<endl;
+                cout<<"1) decimal\n2) binary\n3)hexa decimal\n";
+                cin>>base2;
+                switch(base2)
+                    {
+// to convert octal to decimal
+                    case 1:
+                    {
+                        bool tester=dec<0;// to deal with negative numbers
+                        if(dec==0)
+                            {
+                                cout<<"decimal representation is "<<dec;
+                            }
+                        else 
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%10;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=10;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"decimal representation is ";
+                            }
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            //print all elements of string
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    // to convert octal to binary
+                    case 2:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"Octal representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%2;
+                                        z=to_string(y);
+                                        converted.append(z);
+                                        dec/=2;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"octal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+
+                    break;
+                    // to conert octal to hexadecimal
+                    case 3:
+                    {
+                        bool tester=dec<0;
+                        if(dec==0)
+                            {
+                                cout<<"hexadecimal representation is "<<dec;
+                            }
+                        else
+                            {
+                                while(dec!=0)
+                                    {
+                                        dec=abs(dec);
+                                        int y;
+                                        y=dec%16;
+                                        switch(y)
+                                            {
+                                            case 10:
+                                                converted.append("A");
+                                                break;
+                                            case 11:
+                                                converted.append("B");
+                                                break;
+                                            case 12:
+                                                converted.append("C");
+                                                break;
+                                            case 13:
+                                                converted.append("D");
+                                                break;
+                                            case 14:
+                                                converted.append("E");
+                                                break;
+                                            case 15:
+                                                converted.append("F");
+                                                break;
+                                            default:
+                                                z=to_string(y);
+                                                converted.append(z);
+                                                break;
+                                            }
+                                        dec/=16;
+                                    }
+                                reverse(converted.begin(),converted.end());
+                                cout<<"hexadecimal representation is ";
+                            }
+
+
+                        if(tester)
+                            cout<<"-";
+                        for(auto x:converted)
+                            {
+                                cout<<x;
+                            }
+
+                    }
+                    break;
+                    default://give chance to choose appropriate base
+                        cout<<"invalid input"<<endl;
+                        goto g;
+                    }
+
+
+            }
+
+        }
+        else{
+                //improper input
+            cout<<"invalid input"<<endl;
+        }
+}
+break;
+}
+
+    }
+
+
